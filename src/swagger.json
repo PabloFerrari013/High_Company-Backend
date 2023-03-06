@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API de manipulação de produtos",
+    "description": "Essa API gerencia um CRUD de produtos",
+    "contact": {
+      "email": "pabloferraricaliari@gmail.com"
+    },
+    "version": "1.0.0",
+    "servers": [
+      {
+        "url": "http://localhost:3333",
+        "description": "API de teste"
+      }
+    ]
+  },
+  "paths": {
+    "/xpto/products/ ": {
+      "post": {
+        "sumary": "Cadastro de produto",
+        "description": "Essa rota criará um novo produto",
+        "tags": ["Products"],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Product"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "name": "Hoodie Dual Navy",
+                    "img_URL": "https://highcompanybr.com/wp-content/uploads/2023/02/Hoodie_Dual_Navy.jpg",
+                    "price": 42900,
+                    "stock": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Unauthorized, add x-high-auth key to header"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/xpto/products/  ": {
+      "get": {
+        "sumary": "Listagem de todos os produto",
+        "description": "Essa rota lista todos os produtos",
+        "tags": ["Products"],
+        "security": [{ "apiKey": [] }],
+
+        "responses": {
+          "401": {
+            "description": "Unauthorized, add x-high-auth key to header"
+          },
+          "200": {
+            "description": "Success"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/xpto/products/{id}": {
+      "get": {
+        "sumary": "Obtenha um produto pelo id",
+        "description": "Essa buscará por um produto pelo id",
+        "tags": ["Products"],
+        "security": [{ "apiKey": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Busque o produto pelo id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized, add x-high-auth key to header"
+          },
+          "404": {
+            "description": "Not found, the specified id was not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/xpto/products/{id} ": {
+      "put": {
+        "sumary": "Atualize um produto pelo id",
+        "description": "Essa rota ataulizará um produto pelo id",
+        "tags": ["Products"],
+        "security": [{ "apiKey": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#components/schemas/Product"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "name": "Hoodie Dual Navy",
+                    "img_URL": "https://highcompanybr.com/wp-content/uploads/2023/02/Hoodie_Dual_Navy.jpg",
+                    "price": 42900,
+                    "stock": 10
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Atualize o produto pelo id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized, add x-high-auth key to header"
+          },
+          "404": {
+            "description": "Not found, the specified id was not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/xpto/products/{id}   ": {
+      "delete": {
+        "sumary": "Delete um produto pelo id",
+        "description": "Essa remove um produto pelo id",
+        "tags": ["Products"],
+        "security": [{ "apiKey": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Remova o produto pelo id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized, add x-high-auth key to header"
+          },
+          "404": {
+            "description": "Not found, the specified id was not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "img_URL": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "stock": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "apiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-high-auth"
+      }
+    }
+  }
+}
