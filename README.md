@@ -8,19 +8,24 @@ Visit the Visite a [documentation](https://high-company.herokuapp.com/docs/)
 ## Starting project
 
 - Clone project from github:
-`
+
+```bash
 $ git clone https://github.com/PabloFerrari013/High_Company-Backend.git
-`
-- Go to the root folder and install the libraries: 
-`
+```
+
+- Go to the root folder and install the libraries:
+
+```bash
 $ yarn 
 or
 $ npm install
-`
+```
+
 - Create and run a Redis database
 - Create an instance on EC2
 - Create an .env file with the environment variables:
-`
+
+```bash
 NODE_ENV='application state'
 HEADERS_AUTH_TOKEN='authentication token from the request headers to the server'
 REDIS_URL='redis database connection url'
@@ -30,10 +35,12 @@ DATABASE_PORT="5432"
 DATABASE_PASSWORD="database password"
 DATABASE_USERNAME="database username"
 DATABASE="database"
-`
+```
+
 - run the project with:
-`
+
+```bash
 $ yarn dev
 or
 $ npm run dev
-`
+```
