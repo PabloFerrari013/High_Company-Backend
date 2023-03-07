@@ -89,7 +89,7 @@ export async function create(req: Request, res: Response) {
     const envSchema = z.object({
       name: z.string(),
       price: z.number(),
-      img_URL: z.number(),
+      img_URL: z.string(),
       stock: z.number()
     })
 

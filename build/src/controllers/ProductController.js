@@ -157,7 +157,7 @@ function create(req, res) {
                     envSchema = zod_1.z.object({
                         name: zod_1.z.string(),
                         price: zod_1.z.number(),
-                        img_URL: zod_1.z.number(),
+                        img_URL: zod_1.z.string(),
                         stock: zod_1.z.number()
                     });
                     envSchema.safeParse(data);
