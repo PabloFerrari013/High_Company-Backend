@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Awesome project developed with TypeORM.",
   "engines": {
-    "node": "18.x"
+    "node": "9.x"
   },
   "type": "commonjs",
   "devDependencies": {
