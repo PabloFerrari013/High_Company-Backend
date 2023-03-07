@@ -38,6 +38,7 @@
     "zod": "^3.20.6"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "node ./build/index.js",
     "build": "tsc",
     "test": "jest",
