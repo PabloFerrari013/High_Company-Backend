@@ -30,6 +30,8 @@ var bodyParser = __importStar(require("body-parser"));
 var swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 var cors = require("cors");
 var swagger_json_1 = __importDefault(require("./swagger.json"));
+var dotenv_1 = require("dotenv");
+(0, dotenv_1.config)();
 // create express app
 var app = express();
 app.use(bodyParser.json());

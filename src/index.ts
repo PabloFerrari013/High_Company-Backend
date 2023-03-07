@@ -6,7 +6,8 @@ import * as bodyParser from 'body-parser'
 import swagger from 'swagger-ui-express'
 import cors = require('cors')
 import swaggerDocs from './swagger.json'
-import { env } from './env'
+import { config } from 'dotenv'
+config()
 
 // create express app
 const app = express()

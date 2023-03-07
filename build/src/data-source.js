@@ -3,15 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppDataSource = void 0;
 require("reflect-metadata");
 var typeorm_1 = require("typeorm");
-var env_1 = require("./env");
 var Product_entity_1 = require("./entities/Product.entity");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: 'postgres',
-    host: env_1.env.DATABASE_HOST,
-    port: Number(env_1.env.DATABASE_PORT),
-    password: env_1.env.DATABASE_PASSWORD,
-    username: env_1.env.DATABASE_USERNAME,
-    database: env_1.env.DATABASE,
+    host: 'db.c8q6okk3dbny.sa-east-1.rds.amazonaws.com',
+    port: 5432,
+    password: 'CkpckuAopJBgwTttPEQe',
+    username: 'postgres',
+    database: 'db',
     synchronize: true,
     logging: false,
     entities: [Product_entity_1.Product]

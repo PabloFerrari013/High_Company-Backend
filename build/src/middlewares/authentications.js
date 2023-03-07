@@ -37,13 +37,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authenticate = void 0;
-var env_1 = require("../env");
 function authenticate(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var authToken;
         return __generator(this, function (_a) {
             authToken = req.headers['x-high-auth'];
-            if (authToken !== env_1.env.HEADERS_AUTH_TOKEN) {
+            if (authToken !== process.env.HEADERS_AUTH_TOKEN) {
                 return [2 /*return*/, res
                         .status(401)
                         .send('You do not have permission to perform this request.')];

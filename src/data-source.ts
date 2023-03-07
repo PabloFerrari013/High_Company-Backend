@@ -1,15 +1,14 @@
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { env } from './env'
 import { Product } from './entities/Product.entity'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
-  host: env.DATABASE_HOST,
-  port: Number(env.DATABASE_PORT),
-  password: env.DATABASE_PASSWORD,
-  username: env.DATABASE_USERNAME,
-  database: env.DATABASE,
+  host: 'db.c8q6okk3dbny.sa-east-1.rds.amazonaws.com',
+  port: 5432,
+  password: 'CkpckuAopJBgwTttPEQe',
+  username: 'postgres',
+  database: 'db',
   synchronize: true,
   logging: false,
   entities: [Product]

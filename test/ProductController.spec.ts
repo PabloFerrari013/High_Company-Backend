@@ -1,5 +1,4 @@
 import request from 'supertest'
-import { env } from '../src/env'
 
 const productData = {
   name: 'kit calças jeans',
@@ -10,12 +9,12 @@ const productData = {
 
 var commonHeaders = {
   'Content-Type': 'application/json',
-  'x-high-auth': env.HEADERS_AUTH_TOKEN
+  'x-high-auth': process.env.HEADERS_AUTH_TOKEN
 }
 
 describe('Create a new product', () => {
   it('should create a new product', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .post('/xpto/products')
       .set(commonHeaders)
       .send(productData)
@@ -23,7 +22,7 @@ describe('Create a new product', () => {
   })
 
   it('should not be able to create a product without authentication', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .post('/xpto/products')
       .send(productData)
       .expect(401)
@@ -32,14 +31,14 @@ describe('Create a new product', () => {
 
 describe('Find all products', () => {
   it('should be able to list all products', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
   })
 
   it('should not be able to list all products without authentication', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .post('/xpto/products')
       .expect(401)
   })
@@ -47,7 +46,7 @@ describe('Find all products', () => {
 
 describe('Find a product', () => {
   it('should be able to find a product', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -56,21 +55,21 @@ describe('Find a product', () => {
 
     const id = products[0].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .get(`/xpto/products/${id}`)
       .set(commonHeaders)
       .expect(200)
   })
 
   it('should not be able to find a product with incorrect id', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products/incorrect-id')
       .set(commonHeaders)
       .expect(404)
   })
 
   it('should not be able to find a product without authentication', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -79,7 +78,7 @@ describe('Find a product', () => {
 
     const id = products[0].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .get(`/xpto/products/${id}`)
       .expect(401)
   })
@@ -87,7 +86,7 @@ describe('Find a product', () => {
 
 describe('Edit a product', () => {
   it('should be able to edit a product', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -96,7 +95,7 @@ describe('Edit a product', () => {
 
     const id = products[products.length - 1].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .put(`/xpto/products/${id}`)
       .set(commonHeaders)
       .send(productData)
@@ -104,7 +103,7 @@ describe('Edit a product', () => {
   })
 
   it('should not be able to edit a product with incorrect id', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .put('/xpto/products/incorrect-id')
       .set(commonHeaders)
       .send(productData)
@@ -112,7 +111,7 @@ describe('Edit a product', () => {
   })
 
   it('should not be able to edit a product without authentication', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -121,7 +120,7 @@ describe('Edit a product', () => {
 
     const id = products[products.length - 1].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .put(`/xpto/products/${id}`)
       .send(productData)
       .expect(401)
@@ -130,7 +129,7 @@ describe('Edit a product', () => {
 
 describe('Delete a product', () => {
   it('should be able to delete a product', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -139,21 +138,21 @@ describe('Delete a product', () => {
 
     const id = products[products.length - 1].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .delete(`/xpto/products/${id}`)
       .set(commonHeaders)
       .expect(200)
   })
 
   it('should not be able to delete a product with incorrect id', async () => {
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .delete('/xpto/products/incorrect-id')
       .set(commonHeaders)
       .expect(404)
   })
 
   it('should not be able to delete a product without authentication', async () => {
-    const res = await request(`http://localhost:${env.PORT}`)
+    const res = await request(`http://localhost:${process.env.PORT || 3333}`)
       .get('/xpto/products')
       .set(commonHeaders)
       .expect(200)
@@ -162,7 +161,7 @@ describe('Delete a product', () => {
 
     const id = products[products.length - 1].id
 
-    await request(`http://localhost:${env.PORT}`)
+    await request(`http://localhost:${process.env.PORT || 3333}`)
       .delete(`/xpto/products/${id}`)
       .expect(401)
   })

@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
-var env_1 = require("../src/env");
 var productData = {
     name: 'kit calças jeans',
     price: 12345,
@@ -49,13 +48,13 @@ var productData = {
 };
 var commonHeaders = {
     'Content-Type': 'application/json',
-    'x-high-auth': env_1.env.HEADERS_AUTH_TOKEN
+    'x-high-auth': process.env.HEADERS_AUTH_TOKEN
 };
 describe('Create a new product', function () {
     it('should create a new product', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .post('/xpto/products')
                         .set(commonHeaders)
                         .send(productData)
@@ -69,7 +68,7 @@ describe('Create a new product', function () {
     it('should not be able to create a product without authentication', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .post('/xpto/products')
                         .send(productData)
                         .expect(401)];
@@ -84,7 +83,7 @@ describe('Find all products', function () {
     it('should be able to list all products', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -97,7 +96,7 @@ describe('Find all products', function () {
     it('should not be able to list all products without authentication', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .post('/xpto/products')
                         .expect(401)];
                 case 1:
@@ -112,7 +111,7 @@ describe('Find a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -120,7 +119,7 @@ describe('Find a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[0].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .get("/xpto/products/".concat(id))
                             .set(commonHeaders)
                             .expect(200)];
@@ -133,7 +132,7 @@ describe('Find a product', function () {
     it('should not be able to find a product with incorrect id', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products/incorrect-id')
                         .set(commonHeaders)
                         .expect(404)];
@@ -147,7 +146,7 @@ describe('Find a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -155,7 +154,7 @@ describe('Find a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[0].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .get("/xpto/products/".concat(id))
                             .expect(401)];
                 case 2:
@@ -170,7 +169,7 @@ describe('Edit a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -178,7 +177,7 @@ describe('Edit a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[products.length - 1].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .put("/xpto/products/".concat(id))
                             .set(commonHeaders)
                             .send(productData)
@@ -192,7 +191,7 @@ describe('Edit a product', function () {
     it('should not be able to edit a product with incorrect id', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .put('/xpto/products/incorrect-id')
                         .set(commonHeaders)
                         .send(productData)
@@ -207,7 +206,7 @@ describe('Edit a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -215,7 +214,7 @@ describe('Edit a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[products.length - 1].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .put("/xpto/products/".concat(id))
                             .send(productData)
                             .expect(401)];
@@ -231,7 +230,7 @@ describe('Delete a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -239,7 +238,7 @@ describe('Delete a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[products.length - 1].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .delete("/xpto/products/".concat(id))
                             .set(commonHeaders)
                             .expect(200)];
@@ -252,7 +251,7 @@ describe('Delete a product', function () {
     it('should not be able to delete a product with incorrect id', function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .delete('/xpto/products/incorrect-id')
                         .set(commonHeaders)
                         .expect(404)];
@@ -266,7 +265,7 @@ describe('Delete a product', function () {
         var res, products, id;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                case 0: return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                         .get('/xpto/products')
                         .set(commonHeaders)
                         .expect(200)];
@@ -274,7 +273,7 @@ describe('Delete a product', function () {
                     res = _a.sent();
                     products = JSON.parse(res.text).products;
                     id = products[products.length - 1].id;
-                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(env_1.env.PORT))
+                    return [4 /*yield*/, (0, supertest_1.default)("http://localhost:".concat(process.env.PORT || 3333))
                             .delete("/xpto/products/".concat(id))
                             .expect(401)];
                 case 2:

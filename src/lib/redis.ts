@@ -1,8 +1,5 @@
-import {env} from '../env'
-const Redis = require('ioredis');
+const Redis = require('ioredis')
 
 export const redisClient = new Redis({
-  url: env.REDIS_URL
-});
-
-
+  url: process.env.REDIS_URL
+})
